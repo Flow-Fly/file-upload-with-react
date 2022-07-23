@@ -13,20 +13,12 @@ router.get("/rubberducks", async (req, res, next) => {
 
 router.post(
 	"/rubberducks",
-	uploader.array("picture"),
+	uploader.single("picture"),
 	async (req, res, next) => {
 		try {
-			// if (req.file) {
-			//   req.body.picture = req.file.path
-			// } else {
-			//   req.body.picture = 'An other picture'
-			// }
-			console.log(req.files)
-			const pictures = req.files.map((pic) => pic.path)
-
 			const newDuck = await Duck.create({
 				...req.body,
-				picture: pictures,
+				picture: req.file?.path,
 			})
 
 			res.status(201).json({ message: "Successfully created !" })

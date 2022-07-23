@@ -6,7 +6,7 @@ const rubberDuckSchema = new Schema({
 		type: String,
 		enum: ["gold", "wood", "plastic"],
 	},
-	picture: [String],
+	picture: String,
 	isCute: Boolean,
 })
 

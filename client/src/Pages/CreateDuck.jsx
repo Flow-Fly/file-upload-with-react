@@ -9,16 +9,6 @@ const CreateDuck = () => {
 	const [message, setMessage] = useState(null)
 	const [picture, setPicture] = useState(null)
 
-	const handleFileUpload = (e) => {
-		// const tempArray = []
-		// const files = Array.from(e.target.files)
-
-		// files.forEach((file) => {
-		// 	tempArray.push(file)
-		// })
-		setPicture([...e.target.files])
-	}
-
 	const handleSubmit = (e) => {
 		e.preventDefault()
 
@@ -27,12 +17,7 @@ const CreateDuck = () => {
 		fd.append("name", name)
 		fd.append("material", material)
 		fd.append("isCute", isCute === "yes" ? true : false)
-		/**
-		 * MULTIPLE UPLOAD
-		 */
-		for (let pic of picture) {
-			fd.append("picture", pic)
-		}
+		fd.append("picture", picture)
 
 		// This is just to log everything that is inside the FormData if you need to have access iy
 		for (let [key, value] of fd.entries()) {
@@ -79,7 +64,7 @@ const CreateDuck = () => {
 					type="file"
 					name="picture"
 					multiple
-					onChange={handleFileUpload}
+					onChange={(e) => setPicture(e.target.files[0])}
 				/>
 			</div>
 			<div>
